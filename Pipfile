@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+django-extensions = "*"
+django-nose = "*"
+
+[packages]
+djangorestframework = "*"
+django = "*"
+raven = "*"
+django-configurations = "*"
+django-log-request-id = "*"
+django-filter = "*"
+django-cors-headers = "*"
+drf-yasg = "*"
+djangorestframework-jwt = "*"
+pyjsend = "*"
+whitenoise = "*"
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+install_deps = "pre-commit install"

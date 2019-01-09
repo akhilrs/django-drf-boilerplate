@@ -1,0 +1,21 @@
+#!/bin/sh
+# NOTE: This file is only used for localhost development. A similar is generated
+# by ansible when deploying to real environments.
+# The python local_nopost settings file will remove '"' and '=' characters from the values
+# If those are required inside the strings local_nopost need to be upgraded
+
+export BASE_URL="http://localhost:8000"
+export BROKER_URL="amqp://guest:guest@localhost:5672/"
+export DJANGO_SECRET_KEY="^b46w^zsxhrthkq2p7ty1dt5zov%4@eq@j8e%f(ki_#2rnbp%-d"
+export JWT_SECRET_KEY="]fJyj91nF4D7mVcNb[/DD:8rs=8CucGQ1|r? GR6_s:W]'G1QcV[5h~ePZhJ"
+
+export POSTGRES_DB=messaging
+export POSTGRES_USER=postgres
+export POSTGRES_PASSWORD=password
+export POSTGRES_HOST=localhost
+export POSTGRES_PORT=5432
+
+export FCM_API_KEY='AIzaSyC-7SI0Ss2qaB074987EUpfClX3NrSW_JI'
+
+
+
