@@ -10,6 +10,7 @@ pre-commit = "*"
 black = "==18.9b0"
 "flake8" = "*"
 django-silk = "*"
+django-debug-toolbar = "*"
 
 [packages]
 djangorestframework = "*"
@@ -23,7 +24,7 @@ drf-yasg = "*"
 djangorestframework-jwt = "*"
 pyjsend = "*"
 whitenoise = "*"
-django-debug-toolbar = "*"
+pyyaml = "==4.2b4"
 
 [requires]
 python_version = "3.7"
