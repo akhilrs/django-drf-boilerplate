@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """project_name URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -45,9 +46,9 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("api/v1/", include(router.urls)),
-    path('api/v1/users', include(user_urls)),
+    path("api/v1/users", include(user_urls)),
 ]
 
 # Rest framework urls
@@ -71,8 +72,30 @@ urlpatterns += staticfiles_urlpatterns()
 
 # Swagger URLs
 urlpatterns += [
-    url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    url(r'^swagger$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    url(r'^doc$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    url(
+        r"^swagger(?P<format>\.json|\.yaml)$",
+        schema_view.without_ui(cache_timeout=0),
+        name="schema-json",
+    ),
+    url(
+        r"^swagger$",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
+    url(
+        r"^doc$",
+        schema_view.with_ui("redoc", cache_timeout=0),
+        name="schema-redoc",
+    ),
 ]
 
+# Debug toolbar
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+        path("__debug__/", include(debug_toolbar.urls)),
+        # For django versions before 2.0:
+        # url(r'^__debug__/', include(debug_toolbar.urls)),
+        url(r"^silk", include("silk.urls", namespace="silk")),
+    ] + urlpatterns

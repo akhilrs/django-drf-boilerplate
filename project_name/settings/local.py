@@ -11,7 +11,18 @@ class Local(Common):
 
     # Testing
     INSTALLED_APPS = Common.INSTALLED_APPS
-    INSTALLED_APPS += ("django_nose", "django_extensions")
+    INSTALLED_APPS += (
+        "django_nose",
+        "django_extensions",
+        "debug_toolbar",
+        "silk",
+    )
+
+    MIDDLEWARE = Common.MIDDLEWARE
+    MIDDLEWARE += (
+        "silk.middleware.SilkyMiddleware",
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    )
     TEST_RUNNER = "django_nose.NoseTestSuiteRunner"
     NOSE_ARGS = [
         BASE_DIR,

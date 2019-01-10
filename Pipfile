@@ -6,6 +6,10 @@ name = "pypi"
 [dev-packages]
 django-extensions = "*"
 django-nose = "*"
+pre-commit = "*"
+black = "==18.9b0"
+"flake8" = "*"
+django-silk = "*"
 
 [packages]
 djangorestframework = "*"
@@ -19,6 +23,7 @@ drf-yasg = "*"
 djangorestframework-jwt = "*"
 pyjsend = "*"
 whitenoise = "*"
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.7"

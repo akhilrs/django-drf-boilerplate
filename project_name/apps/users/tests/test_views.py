@@ -21,8 +21,6 @@ class TestUserListTestCase(APITestCase):
         self.url_login = reverse("login")
         self.url_user = reverse("user-list")
         self.user_data = model_to_dict(UserFactory.build())
-        self.user_data["mvp_user_id"] = str(factory.Sequence(lambda x: x))
-        self.user_data["role"] = "role_name"
         self.client.post(self.url_user, self.user_data)
 
     def test_post_request_with_no_data_fails(self):
@@ -31,8 +29,6 @@ class TestUserListTestCase(APITestCase):
 
     def test_post_request_with_valid_data_succeeds(self):
         user_data = model_to_dict(UserFactory.build())
-        user_data["mvp_user_id"] = str(factory.Sequence(lambda x: x))
-        user_data["role"] = "role_name"
         response = self.client.post(self.url_user, user_data)
         eq_(response.status_code, status.HTTP_201_CREATED)
 
