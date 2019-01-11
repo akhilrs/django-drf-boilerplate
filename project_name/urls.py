@@ -48,6 +48,11 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include(router.urls)),
+    # django-rest-auth with social
+    url(r"^auth/", include("rest_auth.urls")),
+    url(r"^auth/registration/", include("rest_auth.registration.urls")),
+    # social login
+    url(r"^auth/", include("project_name.apps.auth.urls")),
     path("api/v1/users", include(user_urls)),
 ]
 
@@ -83,7 +88,7 @@ urlpatterns += [
         name="schema-swagger-ui",
     ),
     url(
-        r"^doc$",
+        r"^docs$",
         schema_view.with_ui("redoc", cache_timeout=0),
         name="schema-redoc",
     ),

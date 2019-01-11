@@ -25,6 +25,7 @@ djangorestframework-jwt = "*"
 pyjsend = "*"
 whitenoise = "*"
 pyyaml = "==4.2b4"
+django-rest-auth = {version = "*", extras = ["with_social"]}
 
 [requires]
 python_version = "3.7"

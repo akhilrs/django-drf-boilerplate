@@ -18,16 +18,23 @@ class Common(Configuration):
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
-
+        "django.contrib.sites",
         # Third party apps
         "rest_framework",  # utilities for rest apis
         "django_filters",  # for filtering rest endpoints
         "corsheaders",
         "raven.contrib.django.raven_compat",
         "drf_yasg",
-
+        "rest_auth",
+        # django-rest-auth with social
+        "allauth",
+        "allauth.account",
+        "rest_auth.registration",
+        "allauth.socialaccount",
+        "allauth.socialaccount.providers.facebook",
+        "allauth.socialaccount.providers.twitter",
         # Your apps
-        'project_name.apps.users'
+        "project_name.apps.users",
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
@@ -44,6 +51,7 @@ class Common(Configuration):
         "log_request_id.middleware.RequestIDMiddleware",
     )
 
+    SITE_ID = 1
     ALLOWED_HOSTS = ["*"]
     ROOT_URLCONF = "project_name.urls"
     SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
@@ -59,14 +67,13 @@ class Common(Configuration):
         "whitenoise.storage.CompressedManifestStaticFilesStorage"
     )
 
-
     # Database
     # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
 
@@ -85,7 +92,7 @@ class Common(Configuration):
 
     # General
     APPEND_SLASH = False
-    TIME_ZONE = 'UTC'
+    TIME_ZONE = "UTC"
     LANGUAGE_CODE = "en-us"
     # If you set this to False, Django will make some optimizations so as not
     # to load the internationalization machinery.
@@ -168,7 +175,7 @@ class Common(Configuration):
     LOG_REQUESTS = True
     LOG_REQUEST_ID_HEADER = "HTTP_X_REQUEST_ID"
     GENERATE_REQUEST_ID_IF_NOT_IN_HEADER = True
-    REQUEST_ID_RESPONSE_HEADER = 'X-CORRELATION-ID'
+    REQUEST_ID_RESPONSE_HEADER = "X-CORRELATION-ID"
 
     # Logging
     LOGGING = {
@@ -181,31 +188,31 @@ class Common(Configuration):
             },
             "verbose": {
                 "format": "%(levelname)s [%(asctime)s] [%(module)s] [%(process)d] [%(thread)d] [%(request_id)s] "
-                          "%(name)s:  %(message)s"
+                "%(name)s:  %(message)s"
             },
-            "simple": {"format": "%(levelname)s [%(request_id)s] %(name)s: %(message)s"},
-            'standard': {
-                'format': '%(levelname)-5s [%(asctime)s] [%(request_id)s] %(name)s: %(message)s'
+            "simple": {
+                "format": "%(levelname)s [%(request_id)s] %(name)s: %(message)s"
+            },
+            "standard": {
+                "format": "%(levelname)-5s [%(asctime)s] [%(request_id)s] %(name)s: %(message)s"
             },
         },
         "filters": {
             "require_debug_true": {"()": "django.utils.log.RequireDebugTrue"},
-            'request_id': {
-                '()': 'log_request_id.filters.RequestIDFilter'
-            }
+            "request_id": {"()": "log_request_id.filters.RequestIDFilter"},
         },
         "handlers": {
             "django.server": {
                 "level": "INFO",
                 "class": "logging.StreamHandler",
                 "formatter": "django.server",
-                "filters": ['request_id']
+                "filters": ["request_id"],
             },
             "console": {
                 "level": "DEBUG",
                 "class": "logging.StreamHandler",
                 "formatter": "simple",
-                "filters": ['request_id']
+                "filters": ["request_id"],
             },
             "mail_admins": {
                 "level": "ERROR",
@@ -221,7 +228,7 @@ class Common(Configuration):
                 "maxBytes": 10485760,
                 "backupCount": 20,
                 "encoding": "utf8",
-                "filters": ['request_id']
+                "filters": ["request_id"],
             },
             "error_file_handler": {
                 "class": "logging.handlers.RotatingFileHandler",
@@ -233,14 +240,14 @@ class Common(Configuration):
                 "maxBytes": 10485760,
                 "backupCount": 20,
                 "encoding": "utf8",
-                "filters": ['request_id']
+                "filters": ["request_id"],
             },
             "sentry": {
                 "level": "ERROR",
                 "formatter": "verbose",
                 "class": "raven.handlers.logging.SentryHandler",
                 "dsn": SENTRY_DSN,
-                "filters": ['request_id']
+                "filters": ["request_id"],
             },
         },
         "loggers": {
@@ -288,6 +295,8 @@ class Common(Configuration):
         ),
     }
 
+    REST_USE_JWT = True  # django-rest-auth to use JWT
+
     JWT_AUTH = {
         "JWT_ENCODE_HANDLER": "rest_framework_jwt.utils.jwt_encode_handler",
         "JWT_DECODE_HANDLER": "rest_framework_jwt.utils.jwt_decode_handler",
@@ -311,4 +320,3 @@ class Common(Configuration):
 
     CORS_ORIGIN_ALLOW_ALL = True
     CORS_ALLOW_CREDENTIALS = True
-
