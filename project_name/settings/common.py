@@ -296,6 +296,10 @@ class Common(Configuration):
     }
 
     REST_USE_JWT = True  # django-rest-auth to use JWT
+    REST_AUTH_REGISTER_SERIALIZERS = {
+        "REGISTER_SERIALIZER": "project_name.apps.users.serializers.UserRegisterSerializer"
+    }
+    ACCOUNT_ADAPTER = "project_name.apps.users.adapter.UserAccountAdapter"
 
     JWT_AUTH = {
         "JWT_ENCODE_HANDLER": "rest_framework_jwt.utils.jwt_encode_handler",

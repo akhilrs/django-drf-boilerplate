@@ -24,7 +24,14 @@ LOG = logging.getLogger("project_name.%s" % __name__)
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ["id", "username", "first_name", "last_name", "date_joined"]
+    list_display = [
+        "id",
+        "user_uid",
+        "username",
+        "first_name",
+        "last_name",
+        "date_joined",
+    ]
     fields = [
         "username",
         "password",
@@ -37,4 +44,3 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.site.unregister(Group)
-

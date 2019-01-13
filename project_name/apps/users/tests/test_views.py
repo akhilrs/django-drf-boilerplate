@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import factory
 from django.forms.models import model_to_dict
 from django.urls import reverse
 from faker import Faker

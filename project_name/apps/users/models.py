@@ -12,7 +12,7 @@ from project_name.core.models import TimeStampedModel
 
 @python_2_unicode_compatible
 class User(AbstractUser):
-    user_xid = models.UUIDField(default=uuid.uuid4, editable=False)
+    user_uid = models.UUIDField(default=uuid.uuid4, editable=False)
 
     class Meta:
         verbose_name = _(u"User")
