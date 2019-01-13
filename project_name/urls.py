@@ -26,9 +26,6 @@ from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
 from rest_framework.urls import url
 
-from project_name.apps.users import urls as user_urls
-
-
 router = DefaultRouter(trailing_slash=False)
 
 schema_view = get_schema_view(
@@ -44,16 +41,12 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include(router.urls)),
-    # django-rest-auth with social
-    url(r"^auth/", include("rest_auth.urls")),
-    url(r"^auth/registration/", include("rest_auth.registration.urls")),
-    # social login
-    url(r"^auth/", include("project_name.apps.auth.urls")),
-    path("api/v1/users", include(user_urls)),
+    # auth urls
+    path("api/v1/auth/", include("project_name.apps.auth.urls")),
+    path("api/v1/users", include("project_name.apps.users.urls")),
 ]
 
 # Rest framework urls
