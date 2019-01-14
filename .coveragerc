@@ -5,6 +5,6 @@ omit = *migrations*,
        *test*,
        *admin*,
        ./manage.py,
-       ./{{ project_name }}/config/*,
-       ./{{ project_name }}/wsgi.py,
+       ./project_name/config/*,
+       ./project_name/wsgi.py,
        *__init__*
