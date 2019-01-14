@@ -19,7 +19,7 @@ from .models import User
 
 sensitive_post_parameters_m = method_decorator(sensitive_post_parameters())
 
-LOG = logging.getLogger("project_name.%s" % __name__)
+LOG = logging.getLogger("{{ project_name }}.%s" % __name__)
 
 
 @admin.register(User)

@@ -1,5 +1,5 @@
-site_name: project_name
-site_description: project_name
+site_name: {{ project_name }}
+site_description: {{ project_name }}
 repo_url: https://github.com/The owner of the repository. Either your github username or organization name./piedpiper-web
 site_dir: site
 copyright: Copyright &copy; 2018, <a href="https://github.com/The owner of the repository. Either your github username or organization name.">The owner of the repository. Either your github username or organization name.</a>.

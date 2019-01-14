@@ -8,7 +8,7 @@ from .models import User
 from .permissions import IsUserOrReadOnly
 from .serializers import UserSerializer
 
-LOG = logging.getLogger("project_name.%s" % __name__)
+LOG = logging.getLogger("{{ project_name }}.%s" % __name__)
 
 
 class UserViewSet(
@@ -21,4 +21,3 @@ class UserViewSet(
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsUserOrReadOnly,)
-

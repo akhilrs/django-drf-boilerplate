@@ -34,7 +34,7 @@ class Common(Configuration):
         "allauth.socialaccount.providers.facebook",
         "allauth.socialaccount.providers.twitter",
         # Your apps
-        "project_name.apps.users",
+        "{{ project_name }}.apps.users",
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
@@ -53,15 +53,15 @@ class Common(Configuration):
 
     SITE_ID = 1
     ALLOWED_HOSTS = ["*"]
-    ROOT_URLCONF = "project_name.urls"
+    ROOT_URLCONF = "{{ project_name }}.urls"
     SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
-    WSGI_APPLICATION = "project_name.wsgi.application"
+    WSGI_APPLICATION = "{{ project_name }}.wsgi.application"
 
     # Email
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-    ADMINS = (("Author", "admin@project_name.com"),)
+    ADMINS = (("Author", "admin@{{ project_name }}.com"),)
 
     STATICFILES_STORAGE = (
         "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -223,7 +223,7 @@ class Common(Configuration):
                 "level": "INFO",
                 "formatter": "standard",
                 "filename": os.path.join(
-                    dirname(BASE_DIR), "logs/project_name_info.log"
+                    dirname(BASE_DIR), "logs/{{ project_name }}_info.log"
                 ),
                 "maxBytes": 10485760,
                 "backupCount": 20,
@@ -235,7 +235,7 @@ class Common(Configuration):
                 "level": "ERROR",
                 "formatter": "verbose",
                 "filename": os.path.join(
-                    dirname(BASE_DIR), "logs/project_name_errors.log"
+                    dirname(BASE_DIR), "logs/{{ project_name }}_errors.log"
                 ),
                 "maxBytes": 10485760,
                 "backupCount": 20,
@@ -263,7 +263,7 @@ class Common(Configuration):
                 "propagate": False,
             },
             "django.db.backends": {"handlers": ["console"], "level": "INFO"},
-            "project_name": {
+            "{{ project_name }}": {
                 "handlers": [
                     "info_file_handler",
                     "error_file_handler",
@@ -284,7 +284,7 @@ class Common(Configuration):
         "PAGE_SIZE": int(os.getenv("DJANGO_PAGINATION_LIMIT", 10)),
         "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S%z",
         "DEFAULT_RENDERER_CLASSES": (
-            "project_name.core.renderers.JuloJSONRenderer",
+            "{{ project_name }}.core.renderers.JuloJSONRenderer",
         ),
         "DEFAULT_PERMISSION_CLASSES": [
             "rest_framework.permissions.IsAuthenticated"
@@ -297,9 +297,11 @@ class Common(Configuration):
 
     REST_USE_JWT = True  # django-rest-auth to use JWT
     REST_AUTH_REGISTER_SERIALIZERS = {
-        "REGISTER_SERIALIZER": "project_name.apps.users.serializers.UserRegisterSerializer"
+        "REGISTER_SERIALIZER": "{{ project_name }}.apps.users.serializers.UserRegisterSerializer"
     }
-    ACCOUNT_ADAPTER = "project_name.apps.users.adapter.UserAccountAdapter"
+    ACCOUNT_ADAPTER = (
+        "{{ project_name }}.apps.users.adapter.UserAccountAdapter"
+    )
 
     JWT_AUTH = {
         "JWT_ENCODE_HANDLER": "rest_framework_jwt.utils.jwt_encode_handler",

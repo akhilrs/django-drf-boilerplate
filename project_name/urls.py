@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""project_name URL Configuration
+"""{{ project_name }} URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -30,11 +30,11 @@ router = DefaultRouter(trailing_slash=False)
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="project_name API",
+        title="{{ project_name }} API",
         default_version="v1",
-        description="project_name service api",
+        description="{{ project_name }} service api",
         terms_of_service="",
-        contact=openapi.Contact(email="admin@project_name.com"),
+        contact=openapi.Contact(email="admin@{{ project_name }}.com"),
         license=openapi.License(name="BSD License"),
     ),
     public=True,
@@ -45,8 +45,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include(router.urls)),
     # auth urls
-    path("api/v1/auth/", include("project_name.apps.auth.urls")),
-    path("api/v1/users", include("project_name.apps.users.urls")),
+    path("api/v1/auth/", include("{{ project_name }}.apps.auth.urls")),
+    path("api/v1/users", include("{{ project_name }}.apps.users.urls")),
 ]
 
 # Rest framework urls
