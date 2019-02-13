@@ -15,7 +15,7 @@ factory-boy = "*"
 
 [packages]
 djangorestframework = "*"
-django = "*"
+django = ">=2.1.6"
 raven = "*"
 django-configurations = "*"
 django-log-request-id = "*"
